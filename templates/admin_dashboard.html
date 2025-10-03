@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: left;
+            
+        }
+        .navbar {
+            background-color: #007bff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background-color: #0056b3;
+            text-align: right;
+        }
+        
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        .logo {
+            background-color: #0e8a1a;
+            height: 40px;
+            width: 100%;
+            text-align: center;
+            font-style: italic;
+            font-size: 30px;
+        }
+        .banner {
+            background-image: url("../static/voting.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+
+            height: 1000px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">Admin Dashboard</div>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="{{ url_for('manage_users') }}">Manage Users</a>
+            <a href="{{ url_for('create_election') }}">New Election</a>
+            <a href="{{ url_for('manage_candidates') }}">Add/Remove Candidates</a>
+            <a href="{{ url_for('view_results') }}">View Results</a>
+            <a href="{{ url_for('index') }}"class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300">Logout</a>
+        </div>
+    </div>
+    <div class="banner"> 
+         
+    </div>
+</body>
+</html>

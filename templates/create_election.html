@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create Election</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .dark-mode { background-color: #0f172a; color: white; transition: background-color 0.5s, color 0.5s; }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen text-white transition-all duration-500" id="body">
+    <a href="/admin_dashboard" class="ml-4 mt-4 inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300">← Back to Admin Dashboard</a>
+
+    <div class="container mx-auto py-8">
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl fade-in max-w-lg mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-center">Create a New Election</h2>
+            <form action="/create_election" method="POST" class="flex flex-col gap-4">
+                <label class="font-bold">Election Name:</label>
+                <input type="text" name="name" required class="py-2 px-4 rounded-xl bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-500">
+
+                <label class="font-bold">Start Time:</label>
+                <input type="datetime-local" name="start_time" required class="py-2 px-4 rounded-xl bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+
+                <label class="font-bold">End Time:</label>
+                <input type="datetime-local" name="end_time" required class="py-2 px-4 rounded-xl bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+
+                <button type="submit" class="bg-pink-500 py-2 rounded-xl hover:bg-pink-600 transition duration-300">Create Election</button>
+            </form><br>
+
+            <a href="/manage_candidates" class="block text-center bg-pink-500 py-2 rounded-xl hover:bg-pink-600 transition duration-300">Manage Candidates</a>
+        </div>
+    </div>
+</body>
+</html>

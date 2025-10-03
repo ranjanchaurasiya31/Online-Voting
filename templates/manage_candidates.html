@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Candidates</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .dark-mode { background-color: #0f172a; color: white; transition: background-color 0.5s, color 0.5s; }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen text-white transition-all duration-500">
+    <div class="container mx-auto py-8 fade-in">
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl">
+            <a href="/admin_dashboard" class="text-white bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition duration-300 mb-4 inline-block">← Back to Admin Dashboard</a>
+
+            <h2 class="text-2xl font-bold mb-6">Manage Candidates</h2>
+
+            <form method="POST" class="space-y-4">
+                <label class="block text-lg mb-2">Select Election:</label>
+                <select name="election_id" id="election_id" onchange="fetchCandidates()" required class="w-full p-2 rounded text-black">
+                    <option value="">-- Select Election --</option>
+                    {% for election in elections %}
+                    <option value="{{ election[0] }}">{{ election[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="block text-lg mb-2">Candidate Name:</label>
+                <input type="text" name="name" required class="w-full p-2 rounded text-black">
+
+                <button type="submit" class="bg-pink-500 text-white py-2 rounded-xl hover:bg-pink-600 transition duration-300">Add Candidate</button>
+            </form>
+
+            <h3 class="text-xl font-bold mt-8 mb-4">Existing Candidates</h3>
+            <ul id="candidate_list" class="space-y-2">
+                {% for candidate in candidates %}
+                <li class="flex justify-between items-center bg-gray-700 p-2 rounded">
+                    <span>{{ candidate[1] }} (Election: {{ candidate[2] }})</span>
+                    <form action="/remove_candidate" method="POST" class="inline">
+                        <input type="hidden" name="candidate_id" value="{{ candidate[0] }}">
+                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-300">Remove</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function fetchCandidates() {
+            let electionId = document.getElementById("election_id").value;
+            fetch(`/get_candidates?election_id=${electionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let candidateList = document.getElementById("candidate_list");
+                    candidateList.innerHTML = "";
+                    data.forEach(candidate => {
+                        candidateList.innerHTML += `<li class='flex justify-between items-center bg-gray-700 p-2 rounded'>
+                            ${candidate.name}
+                            <form action='/remove_candidate' method='POST' style='display:inline;'>
+                                <input type='hidden' name='candidate_id' value='${candidate.id}'>
+                                <button type='submit' class='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-300'>Remove</button>
+                            </form>
+                        </li>`;
+                    });
+                })
+                .catch(error => console.error("Error fetching candidates:", error));
+        }
+    </script>
+</body>
+</html>
