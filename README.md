@@ -3,19 +3,20 @@ The Online Voting System is a secure and user-friendly web application that enab
 
 This project is designed as a group project to demonstrate concepts of web development, database management, and data visualization.
 
-**👥 Group Members
-1. Aditya Raj
-2. Ranjan Kumar
-3. Anushka Singh
-4. Amritanshu Kumar**
+**👥 Group Members**
+**1. Aditya Raj**
+**2. Ranjan Kumar**
+**3. Anushka Singh**
+**4. Amritanshu Kumar**
 
 **🧰 Technologies Used**
-**Category	              Technologies**
-Frontend	            HTML5, CSS3, Bootstrap
-Backend	              Python (Flask Framework)
-Database	            SQLite3
-Visualization  	      Chart.js (Pie and Line Charts)
-Security	            Session management, CAPTCHA authentication
+
+**Category**	              **Technologies**                                                                                                                  
+Frontend	            HTML5, CSS3, Bootstrap                                                                                                                  
+Backend	              Python (Flask Framework)                                                                                                                
+Database	            SQLite3                                                                                                                                 
+Visualization  	      Chart.js (Pie and Line Charts)                                                                                                          
+Security	            Session management, CAPTCHA authentication                                                                                              
 Version Control	      Git & GitHub
 
 **⚙️ Features**
