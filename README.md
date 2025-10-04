@@ -22,21 +22,17 @@ Version Control	      Git & GitHub
 
 **👨‍💻 User Side**
 
-    . User Registration & Login (with CAPTCHA verification)                                                                                                    
-    . Secure session-based authentication
-    . Dynamic election selection
-    . Real-time voting system (one vote per election)
+. User Registration & Login (with CAPTCHA verification)                                                                                                        
+. Secure session-based authentication                                                                                                                          
+. Dynamic election selection                                                                                                                                   
+. Real-time voting system (one vote per election)
 
 **🧑‍💼 Admin Side**
 
 . Admin login with session control
-
 . Create and manage elections
-
 . Add and remove candidates
-
 . Monitor live vote counts
-
 . View election statistics and winner results
 
 **🗂️ Database Schema**
