@@ -29,11 +29,11 @@ Version Control	      Git & GitHub
 
 **🧑‍💼 Admin Side**
 
-. Admin login with session control
-. Create and manage elections
-. Add and remove candidates
-. Monitor live vote counts
-. View election statistics and winner results
+. Admin login with session control                                                                                                                             
+. Create and manage elections                                                                                                                                  
+. Add and remove candidates                                                                                                                                    
+. Monitor live vote counts                                                                                                                                     
+. View election statistics and winner results                                            
 
 **🗂️ Database Schema**
 
@@ -41,28 +41,32 @@ Version Control	      Git & GitHub
 
 **1. users**
 
-  . id – Primary Key
-  . username – Unique Username
+  . id – Primary Key                                                                                                                                           
+  . username – Unique Username                                                                                                                                 
   . password – Encrypted Password
 
 **2. elections**
 
-  . id – Primary Key
-  . name – Election Name
-  . start_time – Election Start Date/Time
-  . end_time – Election End Date/Time
+  . id – Primary Key                                                                                                                                           
+  . name – Election Name                                                                                                                                       
+  . start_time – Election Start Date/Time                                                                                                                      
+  . end_time – Election End Date/Time                                                                                                                          
 
 **3. candidates**
 
-  . id – Primary Key
-  . name – Candidate Name
-  . election – Linked Election Name
-  . votes – Vote Count
+  . id – Primary Key                                                                                                                                           
+  . name – Candidate Name                                                                                                                                      
+  . election – Linked Election Name                                                                                                                            
+  . votes – Vote Count                                                                                                                                         
 
 **🚀 Working Procedure**
 
 **1️⃣ Setup**
 
-  . Install Python (3.8 or above)
+  . Install Python (3.8 or above)                                                                                                                              
   . Clone this repository
+  
+    .  git clone https://github.com/Amritanshu319/Online-Voting.git
+
+  
   
