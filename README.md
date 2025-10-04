@@ -7,7 +7,7 @@ This project is designed as a group project to demonstrate concepts of web devel
 1. Aditya Raj
 2. Ranjan Kumar
 3. Anushka Singh
-4. Amritanshu Kumar #Amritanshu319**
+4. Amritanshu Kumar**
 
 **🧰 Technologies Used**
 **Category	              Technologies**
@@ -30,9 +30,13 @@ Version Control	      Git & GitHub
 **🧑‍💼 Admin Side**
 
 . Admin login with session control
+
 . Create and manage elections
+
 . Add and remove candidates
+
 . Monitor live vote counts
+
 . View election statistics and winner results
 
 **🗂️ Database Schema**
