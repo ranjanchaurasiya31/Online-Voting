@@ -3,10 +3,10 @@ The Online Voting System is a secure and user-friendly web application that enab
 
 This project is designed as a group project to demonstrate concepts of web development, database management, and data visualization.
 
-**👥 Group Members**
-**1. Aditya Raj**
-**2. Ranjan Kumar**
-**3. Anushka Singh**
+**👥 Group Members**                                                                                                                                         
+**1. Aditya Raj**                                                                                                                                             
+**2. Ranjan Kumar**                                                                                                                                          
+**3. Anushka Singh**                                                                                                                                          
 **4. Amritanshu Kumar**
 
 **🧰 Technologies Used**
@@ -23,17 +23,17 @@ Version Control	      Git & GitHub
 
 **👨‍💻 User Side**
 
-. User Registration & Login (with CAPTCHA verification)                                                                                                        
-. Secure session-based authentication                                                                                                                          
-. Dynamic election selection                                                                                                                                   
+. User Registration & Login (with CAPTCHA verification)                                                                                                       
+. Secure session-based authentication                                                                                                                         
+. Dynamic election selection                                                                                                                                  
 . Real-time voting system (one vote per election)
 
 **🧑‍💼 Admin Side**
 
-. Admin login with session control                                                                                                                             
-. Create and manage elections                                                                                                                                  
-. Add and remove candidates                                                                                                                                    
-. Monitor live vote counts                                                                                                                                     
+. Admin login with session control                                                                                                                            
+. Create and manage elections                                                                                                                                 
+. Add and remove candidates                                                                                                                                   
+. Monitor live vote counts                                                                                                                                    
 . View election statistics and winner results                                            
 
 **🗂️ Database Schema**
