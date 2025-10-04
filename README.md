@@ -63,10 +63,91 @@ Version Control	      Git & GitHub
 
 **1️⃣ Setup**
 
-  . Install Python (3.8 or above)                                                                                                                              
-  . Clone this repository
+  1. Install Python (3.8 or above)                                                                                                                             
+  2 . Clone this repository
   
-    .  git clone https://github.com/Amritanshu319/Online-Voting.git
+    git clone https://github.com/Amritanshu319/Online-Voting.git
 
-  
-  
+  3. Navigate to the project folder
+     
+    cd Online-Voting
+
+  4. Install dependencies
+
+    pip install flask
+
+**2️⃣ Run the Application**
+
+    python app.py
+
+  Then open your browser and visit:
+
+    http://127.0.0.1:5000/
+     
+**3️⃣ User Flow**
+
+1. Register a new user account
+2. Login using your credentials and complete the CAPTCHA
+3. Choose an election and cast your vote
+4. Once submitted, votes are stored securely in the SQLite database
+5. Users can view results as real-time
+
+**4️⃣ Admin Flow**
+
+1. Log in as an Admin
+2. Create elections and add candidates
+3. Monitor live voting results
+4. View visual statistics (Pie & Line charts)
+5. Declare winners based on live vote counts
+
+**📊 Visualization**
+
+The voting results are represented dynamically using Chart.js:
+  . Pie Chart – Displays candidate vote share
+  . Line Chart – Tracks votes trend for each election
+
+**🧩 Folder Structure**
+
+    Online-Voting/
+    │
+    ├── app.py                  # Main Flask application
+    ├── templates/              # HTML templates
+    │   ├── admin_dashboard.html
+    │   ├── admin_login.html
+    │   ├── base.html
+    │   ├── create_election.html
+    │   ├── election_chart.html
+    │   ├── index.html
+    │   ├── login.html
+    │   ├── manage_candidates.html
+    │   ├── manage_elections.html
+    │   ├── manage_users.html
+    │   ├── register.html
+    │   ├── thank_you.html
+    │   ├── user_dashboard.html
+    │   ├── view_results.html
+    │   ├── vote.html
+    │   └── vote_success.html
+    ├── static/                 # CSS, JS, images
+    │   ├── admin_dashboard.css
+    │   ├── admin_login.css
+    │   ├── index.css
+    │   ├── style.css
+    │   ├── view_result.css
+    │   └── voting.jpg
+    ├── database.db             # SQLite database
+    └── README.md               # Project documentation
+
+**🔒 Security Features**
+
+  . CAPTCHA validation during login                                                                                                                           
+  . Session-based authentication                                                                                                                              
+  . Restricted admin routes                                                                                                                                   
+  . Prevention of multiple votes by a single user
+
+**🧠 Future Enhancements**
+
+  . Integration with Blockchain for immutable vote records                                                                                                    
+  . Add email verification for user registration                                                                                                              
+  . Implement role-based access control                                                                                                                       
+  . Live election timers and countdowns
