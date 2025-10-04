@@ -11,13 +11,14 @@ This project is designed as a group project to demonstrate concepts of web devel
 
 **🧰 Technologies Used**
 
-**Category**	              **Technologies**                                                                                                                  
-Frontend	            HTML5, CSS3, Bootstrap                                                                                                                  
-Backend	              Python (Flask Framework)                                                                                                                
-Database	            SQLite3                                                                                                                                 
-Visualization  	      Chart.js (Pie and Line Charts)                                                                                                          
-Security	            Session management, CAPTCHA authentication                                                                                              
-Version Control	      Git & GitHub
+|**Category**	       |         **Technologies**                    |                                                                                          
+|--------------------|---------------------------------------------|
+|Frontend	           |  HTML5, CSS3, Bootstrap                     |                                                                                          
+|Backend	           |  Python (Flask Framework)                   |                                                                                          
+|Database	           |  SQLite3                                    |                                                                                          
+|Visualization  	   |  Chart.js (Pie and Line Charts)             |                                                                                          
+|Security	           |  Session management, CAPTCHA authentication |                                                                                          
+|Version Control	   |  Git & GitHub                               |  
 
 **⚙️ Features**
 
