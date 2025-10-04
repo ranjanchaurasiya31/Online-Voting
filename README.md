@@ -22,10 +22,10 @@ Version Control	      Git & GitHub
 
 **👨‍💻 User Side**
 
-. User Registration & Login (with CAPTCHA verification)
-. Secure session-based authentication
-. Dynamic election selection
-. Real-time voting system (one vote per election)
+    . User Registration & Login (with CAPTCHA verification)                                                                                                    
+    . Secure session-based authentication
+    . Dynamic election selection
+    . Real-time voting system (one vote per election)
 
 **🧑‍💼 Admin Side**
 
