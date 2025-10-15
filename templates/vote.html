@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Live Voting{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl fade-in">
+        <h2 class="text-3xl font-bold mb-6 text-white">Cast Your Vote</h2>
+
+        <!-- Election Selection -->
+        <div class="form-group mb-6">
+            <label for="election" class="block text-lg mb-2 text-white">Select Election:</label>
+            <select id="election" name="election_id" class="styled-select bg-gray-700 text-white p-2 rounded-xl w-full" required onchange="fetchCandidates(); fetchLiveVotes();">
+                <option value="">-- Select Election --</option>
+                {% for election in elections %}
+                <option value="{{ election[0] }}">{{ election[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Candidate Selection -->
+        <div class="form-group mb-6" id="candidate-section" style="display: none;">
+            <label class="block text-lg mb-2 text-white">Select a Candidate:</label>
+            <div id="candidates-list" class="flex flex-col gap-2"></div>
+        </div>
+
+        <!-- Submit Vote Button -->
+        <button type="button" id="submit-btn" class="bg-pink-500 text-white py-2 px-4 rounded-xl hover:bg-pink-600 transition duration-300" style="display: none;" onclick="submitVote()">Submit Vote</button>
+
+        <!-- Live Vote Count -->
+        <div id="live-vote-count" class="mt-8" style="display: none;">
+            <h3 class="text-2xl font-bold mb-4 text-white">Live Vote Count</h3>
+            <ul id="vote-count-list" class="list-disc pl-6 text-white"></ul>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="bg-red-500 text-white py-2 px-4 rounded-xl hover:bg-red-600 transition duration-300 mt-6 inline-block">Logout</a>
+    </div>
+</div>
+
+<script>
+function fetchCandidates() {
+    let electionId = document.getElementById("election").value;
+    let candidateSection = document.getElementById("candidate-section");
+    let candidatesList = document.getElementById("candidates-list");
+    let submitBtn = document.getElementById("submit-btn");
+
+    if (!electionId) {
+        candidateSection.style.display = "none";
+        submitBtn.style.display = "none";
+        return;
+    }
+
+    fetch(`/get_candidates?election_id=${electionId}`)
+        .then(response => response.json())
+        .then(data => {
+            candidatesList.innerHTML = "";
+
+            if (data.length === 0) {
+                candidatesList.innerHTML = "<p class='text-white'>No candidates available.</p>";
+                return;
+            }
+
+            data.forEach(candidate => {
+                let div = document.createElement("div");
+                div.classList.add("flex", "items-center", "gap-2", "bg-gray-700", "p-2", "rounded-xl", "hover:bg-gray-600", "transition");
+
+                div.innerHTML = `<input type="radio" name="candidate_id" value="${candidate.id}" id="candidate-${candidate.id}" class="mr-2 cursor-pointer">
+                                 <label for="candidate-${candidate.id}" class="text-white cursor-pointer">${candidate.name}</label>`;
+
+                candidatesList.appendChild(div);
+            });
+
+            candidateSection.style.display = "block";
+            submitBtn.style.display = "block";
+        });
+}
+
+function submitVote() {
+    let electionId = document.getElementById("election").value;
+    let candidateId = document.querySelector('input[name="candidate_id"]:checked');
+
+    if (!electionId || !candidateId) {
+        alert("Please select an election and a candidate before voting.");
+        return;
+    }
+
+    fetch('/submit_vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            election_id: electionId,
+            candidate_id: candidateId.value
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Vote submitted successfully!");
+            fetchLiveVotes();
+        } else {
+            alert(data.message || "An error occurred while voting.");
+        }
+    });
+}
+
+function fetchLiveVotes() {
+    let electionId = document.getElementById("election").value;
+    let liveVoteCount = document.getElementById("live-vote-count");
+    let voteCountList = document.getElementById("vote-count-list");
+
+    if (!electionId) {
+        liveVoteCount.style.display = "none";
+        return;
+    }
+
+    fetch(`/get_live_vote_count?election_id=${electionId}`)
+        .then(response => response.json())
+        .then(data => {
+            voteCountList.innerHTML = "";
+
+            if (data.length === 0) {
+                voteCountList.innerHTML = "<li class='text-white'>No votes recorded yet.</li>";
+            } else {
+                data.forEach(candidate => {
+                    let listItem = document.createElement("li");
+                    listItem.classList.add("text-white");
+                    listItem.innerText = `${candidate.name}: ${candidate.votes} votes`;
+                    voteCountList.appendChild(listItem);
+                });
+            }
+
+            liveVoteCount.style.display = "block";
+        });
+
+    setTimeout(fetchLiveVotes, 5000);
+}
+
+document.addEventListener("DOMContentLoaded", fetchLiveVotes);
+</script>
+{% endblock %}

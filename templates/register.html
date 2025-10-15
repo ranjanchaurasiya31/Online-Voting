@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #4f46e5, #ec4899);
+            font-family: Arial, sans-serif;
+            
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: larger;
+        }
+        label {
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #6B73FF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #000DFF;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            color: white;
+            background-color: #ff4d4d;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .back-button:hover {
+            color: #ec4899;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="back-button">🏠Home</a>
+    <div class="container">
+        <h1 class="text-3xl font-bold mb-4">Register</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('register') }}" onsubmit="return validateRegisterForm()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" autofocus required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
+
+            <button type="submit">Register</button>
+            <p class="mt-2 text-center">Already have an account? <a href="{{ url_for('login') }}" class="text-blue-500 hover:underline">Login here</a></p>
+        </form>
+    </div>
+
+    <script>
+        function validateRegisterForm() {
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let confirmPassword = document.getElementById("confirm_password").value.trim();
+
+            if (username === "" || password === "" || confirmPassword === "") {
+                alert("Please fill in all fields.");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters.");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

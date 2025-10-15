@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Candidates</title>
+    <script>
+        function fetchCandidates() {
+            let electionId = document.getElementById("election_id").value;
+            fetch(`/get_candidates?election_id=${electionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let candidateList = document.getElementById("candidate_list");
+                    candidateList.innerHTML = "";
+                    data.forEach(candidate => {
+                        candidateList.innerHTML += `<li>
+                            ${candidate.name}
+                            <form action="/remove_candidate" method="POST" style="display:inline;">
+                                <input type="hidden" name="candidate_id" value="${candidate.id}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </li>`;
+                    });
+                });
+        }
+    </script>
+</head>
+<body>
+    <h2>Manage Candidates</h2>
+
+    <h3>Add New Candidate</h3>
+    <form method="POST">
+        <label>Select Election:</label>
+        <select name="election_id" id="election_id" onchange="fetchCandidates()">
+            {% for election in elections %}
+            <option value="{{ election[0] }}">{{ election[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Candidate Name:</label>
+        <input type="text" name="name" required>
+        <button type="submit">Add Candidate</button>
+    </form>
+
+    <h3>Existing Candidates</h3>
+    <ul id="candidate_list">
+        {% for candidate in candidates %}
+        <li>
+            {{ candidate[1] }} (Election: {{ candidate[2] }})
+            <form action="/remove_candidate" method="POST" style="display:inline;">
+                <input type="hidden" name="candidate_id" value="{{ candidate[0] }}">
+                <button type="submit">Remove</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/admin_dashboard">Back to Admin Dashboard</a>
+</body>
+</html>

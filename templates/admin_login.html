@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #4f46e5, #ec4899);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 350px;
+        }
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        label {
+            color: #e5e5e5;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 16px;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: #ec4899;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #db2777;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .back-button:hover {
+            color: #ec4899;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="{{ url_for('index') }}" class="back-button">🏠Home</a>
+
+    <div class="container">
+        <h2>Admin Login</h2>
+        <form method="POST">
+            <label>Admin Username:</label>
+            <input type="text" name="username" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

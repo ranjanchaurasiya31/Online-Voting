@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .dark-mode { background-color: #0f172a; color: white; transition: background-color 0.5s, color 0.5s; }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .back-button:hover {
+            color: #ec4899;
+        }
+    </style>
+</head>
+<a href="{{ url_for('index') }}" class="back-button">🏠Home</a>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen text-white transition-all duration-500" id="body">
+    <div class="container mx-auto py-8">
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl fade-in max-w-md mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">User Login</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="bg-red-500 text-white p-2 mb-4 rounded">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}" onsubmit="return validateLoginForm()">
+                <div class="mb-4">
+                    <label for="username" class="block mb-1">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" class="w-full p-2 rounded text-black" autofocus required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block mb-1">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full p-2 rounded text-black" required>
+                </div>
+
+                <button type="submit" class="bg-pink-500 w-full py-2 rounded-xl hover:bg-pink-600 transition duration-300">Login</button>
+                <p class="mt-4 text-center">Don't have an account? <a href="{{ url_for('register') }}" class="text-blue-300 hover:text-blue-500">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    function validateLoginForm() {
+        let username = document.getElementById("username").value.trim();
+        let password = document.getElementById("password").value.trim();
+
+        if (username === "" || password === "") {
+            alert("Please fill in all fields.");
+            return false;
+        }
+        return true;
+    }
+    </script>
+</body>
+</html>

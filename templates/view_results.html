@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Election Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4f46e5, #1e3a8a);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex items-center justify-center px-4">
+    <!-- Back Button -->
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="fixed top-4 left-4 z-50 text-sm text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-xl transition shadow-lg">
+        ← Back to Dashboard
+    </a>
+
+    <!-- Dropdown Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <select id="electionFilter" onchange="redirectToElection()"
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl shadow-lg cursor-pointer">
+            <option value="">🎯 Choose Election</option>
+            {% for election in election_names %}
+                <option value="{{ election }}">{{ election }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <script>
+        function redirectToElection() {
+            const selected = document.getElementById("electionFilter").value;
+            if (selected) {
+                window.location.href = `/election/${encodeURIComponent(selected)}`;
+            }
+        }
+    </script>
+    
+
+    <div class="max-w-4xl w-full bg-gray-900 rounded-2xl shadow-lg p-8 mt-20">
+        <!-- Election Results Header -->
+        <h1 class="text-4xl font-bold mb-4 border-b border-gray-600 pb-2">🗳️ Election Results</h1>
+
+        <!-- Winner Display -->
+        {% if election_winners %}
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold mb-2">🏆 Winners</h2>
+                <ul class="space-y-2">
+                    {% for election, (winner, votes) in election_winners.items() %}
+                        <li class="bg-gray-800 p-4 rounded-xl shadow-md">
+                            <strong>{{ election }}</strong><br>
+                            Winner: <span class="text-green-400 font-semibold">{{ winner }}</span> 
+                            with <span class="text-yellow-300 font-bold">{{ votes }}</span> votes
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p class="text-white mb-4">No votes have been cast yet.</p>
+        {% endif %}
+
+        <!-- All Results Table -->
+        <div class="mt-6">
+            <h2 class="text-2xl font-semibold mb-4">📊 Vote Counts</h2>
+            {% if results %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-gray-800 rounded-xl">
+                        <thead>
+                            <tr class="bg-gray-700 text-left text-sm uppercase text-gray-300">
+                                <th class="py-3 px-4">Election</th>
+                                <th class="py-3 px-4">Candidate</th>
+                                <th class="py-3 px-4">Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="voteTableBody">
+                            {% for election, candidate, vote_count in results %}
+                                <tr class="border-b border-gray-700 hover:bg-gray-700 transition vote-row" data-election="{{ election }}">
+                                    <td class="py-3 px-4 font-medium">{{ election }}</td>
+                                    <td class="py-3 px-4">{{ candidate }}</td>
+                                    <td class="py-3 px-4 text-yellow-300 font-bold">{{ vote_count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-white">No vote data available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function filterVotes() {
+            const selectedElection = document.getElementById("electionFilter").value;
+            const rows = document.querySelectorAll(".vote-row");
+
+            rows.forEach(row => {
+                const electionName = row.getAttribute("data-election");
+                if (selectedElection === "" || electionName === selectedElection) {
+                    row.style.display = "table-row";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
